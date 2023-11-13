@@ -421,7 +421,7 @@ macro putstatic index { db 0xb3,(index) shr 8,(index) and 0FFh }
 macro ret index { if index<100h
 		    db 0xa9,index
 		  else
-		    db 0xc4,(index) shr 8,(index) and 0FFh
+		    db 0xc4,0xa9,(index) shr 8,(index) and 0FFh
 		  end if }
 
 macro return { db 0xb1 }
