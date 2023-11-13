@@ -1,3 +1,4 @@
+#!/usr/bin/bash
 rm -rf mod
 mkdir mod
 cp *.asm mod/
