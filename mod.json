@@ -1,0 +1,7 @@
+{
+"name":"jvm",
+"displayName":"yes i write class files, why do you ask?",
+"minGameVersion":142,
+"description":"yes i love writing java mods by writing class files",
+"java":true
+}
