@@ -19,6 +19,9 @@ rm bytecode.inc
 cd ..
 cp mod.json mod/
 cd mod
+ls .|grep ".class">list.txt
+d8 *.class --main-dex-list list.txt
+rm list.txt
 echo "zipping it into the jar"
 zip mod.jar *
 rm *.class
