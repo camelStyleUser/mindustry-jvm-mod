@@ -36,6 +36,10 @@ format binary as 'class'
 	_System 		constant_utf8		'mindustry/world/Block';24
 	out_field		constant_nameandtype	_out,PrintStream_type;25
 	_out			constant_utf8		'health';26
+	_destructible		constant_utf8		'destructible'
+	destructible_field	constant_nameandtype	_destructible,Boolean_type
+	Boolean_type		constant_utf8		'Z'
+	Block.destructible	constant_fieldref	System_class,destructible_field
 	PrintStream_type	constant_utf8		'I';27
 	PrintStream_println	constant_methodref	PrintStream_class,println_method;28
 	PrintStream_class	constant_class		_PrintStream;29
@@ -94,8 +98,11 @@ format binary as 'class'
 		dup
 		bipush 99
 		putfield System.out;set health
+		dup
 		getstatic _Shown
 		putfield _Block.buildvis
+		bipush 1
+		putfield Block.destructible
 		return
 
 	 end_bytecode

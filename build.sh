@@ -25,4 +25,6 @@ rm list.txt
 echo "zipping it into the jar"
 zip mod.jar *
 rm *.class
+rm mod.json
+rm classes.dex
 cd ..
