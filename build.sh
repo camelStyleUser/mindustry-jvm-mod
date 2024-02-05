@@ -4,6 +4,9 @@ mkdir mod
 cp *.asm mod/
 cp jclass.inc mod/jclass.inc
 cp bytecode.inc mod/bytecode.inc
+cp -r sprites/ mod/sprites/
+cp -r bundles/ mod/bundles/
+cp -r sprites-override/ mod/sprites-override/
 cd mod
 for i in *.asm
 do
