@@ -96,7 +96,7 @@ format binary as 'class'
 		ldc Hello;loading name
 		invokespecial Object_init;initializing block
 		dup
-		bipush 99
+		ldc number
 		putfield System.out;set health
 		dup
 		getstatic _Shown

@@ -30,4 +30,5 @@ zip -r mod.jar *
 rm *.class
 rm mod.json
 rm classes.dex
+rm -r */
 cd ..
