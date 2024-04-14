@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 rm -rf mod
 mkdir mod
 cp *.asm mod/
@@ -7,15 +7,21 @@ cp bytecode.inc mod/bytecode.inc
 cp -r sprites/ mod/sprites/
 cp -r bundles/ mod/bundles/
 cp -r sprites-override/ mod/sprites-override/
-cd mod
-for i in *.asm
+for i in $(find ./src|grep .asm)
 do
     if test -f "$i"
     then
-       echo  "file $i :"
-       fasm "$i"
-       rm "$i"
+       echo  "copying $i to mod/${i##*/}"
+       cp "$i" "mod/${i##*/}"
     fi
+done
+echo "copying completed"
+cd mod
+for i in $(ls|grep .asm)
+do
+echo "building $i :"
+fasm "$i"
+rm "$i"
 done
 rm jclass.inc
 rm bytecode.inc
@@ -29,6 +35,6 @@ echo "zipping it into the jar"
 zip -r mod.jar *
 rm *.class
 rm mod.json
-rm classes.dex
+rm classes*.dex
 rm -r */
 cd ..
