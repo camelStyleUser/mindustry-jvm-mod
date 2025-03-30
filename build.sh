@@ -1,23 +1,28 @@
 #!/bin/bash
-rm -rf mod
+cd "`dirname "$0"`"
+./clean.sh
 mkdir mod
-cp *.asm mod/
+#cp *.asm mod/
 cp jclass.inc mod/jclass.inc
 cp bytecode.inc mod/bytecode.inc
 cp -r sprites/ mod/sprites/
 cp -r bundles/ mod/bundles/
 cp -r sprites-override/ mod/sprites-override/
-for i in $(find ./src|grep .asm)
+cd src
+for i in $(find .|grep .asm)
 do
-    if test -f "$i"
+    echo "trying to copy $i"
+    if test -f "${i}"
     then
-       echo  "copying $i to mod/${i##*/}"
-       cp "$i" "mod/${i##*/}"
+       echo  "copying src/${i} to mod/${i}"
+       mkdir -p "../mod/`dirname "$i"`"
+       cp "${i}" "../mod/${i}"
     fi
 done
+cd ..
 echo "copying completed"
 cd mod
-for i in $(ls|grep .asm)
+for i in $(find|grep .asm)
 do
 echo "building $i :"
 fasm "$i"
@@ -28,11 +33,10 @@ rm bytecode.inc
 cd ..
 cp mod.json mod/
 cd mod
-#get files for d8
-ls .|grep ".class">list.txt
 #d8 them all
-d8 *.class --main-dex-list list.txt
-rm list.txt
+zip -r mod.jar * #temporary jar for d8
+d8 --output . mod.jar
+rm mod.jar # remove temporary jar
 echo "zipping it into the jar"
 zip -r mod.jar *
 rm *.class
